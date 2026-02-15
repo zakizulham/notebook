@@ -77,7 +77,7 @@ Silahkan ikuti stepnya. Untuk melatih dalam mengajar. Kita akan mempraktikan sal
 
 ::: {.callout-tip}
 ## Best Practice
-Use comments to explain the why of your code, not the how or the what. The what and how of your code are always possible to figure out...
+Use comments to explain the why of your code, not the how or the what. The what and how of your code are always possible to figure out, even if it might be tedious, by carefully reading it. If you describe every step in the comments, and then change the code, you will have to remember to update the comments as well or it will be confusing when you return to your code in the future.
 :::
 
 oke, kita akan terapkan.
