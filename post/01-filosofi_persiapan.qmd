@@ -1,0 +1,183 @@
+---
+title: 'Bab 1: Filosofi & Persiapan'
+author: "Muhammad Zaki Zulhamlizar"
+date: 2026-02-14
+toc: true
+---
+
+kembali ke [halaman utama](../index.qmd)
+
+<!-- Bab 1: Filosofi & Persiapan -->
+
+# Filosofi & Persiapan
+
+Untuk memastikan mental model asisten benar sebelum menyentuh terminal, kita akan membahas mengapa kita pakai ini tools dan/atau sistem ini. Setup instalasi.
+Rujukan pembelajaran untuk pemantik belajar & dokumentasi utama untuk informasi terkait dengan quarto.
+
+#### Kenapa sih quarto?
+
+Mungkin kalian bertanya, kenapa tidak pakai Word atau Google Docs saja?
+
+Quarto itu lanjutan gaya penulisan untuk format laporan R, bentuk *upgrade* RMarkdown. Quarto memudahkan penulisan laporan untuk bahasa R untuk memudahkan komunikasi hasil dari analisa bahasa R ke pelaporan lanjutan.
+
+Umumnya bisa dihasilkan dalam bentuk dokumen, persentation, dan bahkan html.
+Karena bisa dihasilkan dalam bentuk html, kita dapat memanfaatkan fitur yang mudah ini untuk menghasilkan web tanpa tau seluk beluk membuat web seperti apa.
+
+Detail referensi yang digunakan adalah buku [r for data science](https://r4ds.hadley.nz/) dari Hadley Wickham terutama [Chapter 28](https://r4ds.hadley.nz/quarto.html) untuk format komunikasi quarto dan [Chapter 29](https://r4ds.hadley.nz/quarto-formats.html) untuk format output umum komunikasi Quarto.
+
+Saya sangat menyarankan untuk merujuk referensi tersebut untuk pembelajaran pemantik. Kalau untuk mengetahui informasi quarto secara lengkap tetap pantau laman utama resminya, seperti [Quarto.org](https://quarto.org) dan [guide quarto](https://quarto.org/docs/guide/).
+
+Umumnya html yang dihasilkan oleh quarto sudah mendapatkan dukungan MathJax/LaTeX. Sebuah ekstensi browser yang dapat menghasilkan persamaan matematika seperti latex di overleaf. Ini sudah terinstall secara otomatis dan tidak perlu setup manual. Cukup mengikuti penulisan latex yang diapit oleh *dollarsign* untuk penulisan persamaan. 
+
+Kendati demikian, terdapat kelemahan untuk tampilan mobile untuk tidak otomatis mengikuti layout tampilan browser. Ia tidak akan terpotong ke kanan dan akan terus melanjutkan persamaan sampai selesai. Jadi, untuk penyesuaian panjang persamaan tetap harus dilakukan manual.
+
+#### Memasang sebagai Web
+
+Hasil penulisan dari quarto Markdown dapat diatur menjadi komponen-komponen web, seperti `*.html` & `*.css`. Bisa custom untuk ditambahkan komponen javaScript. Tapi, javaScript tidak didukung dilakukan secara otomatis. Kita sendiri yang harus menambahkan manual. 
+
+Bagi kalian yang tidak mengetahui alur informasi web. Sebuah alur kirim dan terima informasi web melalui internet membutuhkan layanan aktif menerima permintaan (*request*) sepanjang hari. Kita akan memanfaatkan GitHub Pages sebagai server yang tersedia gratis dan cepat. 
+
+Berhubung kita hanya akan memanfaatkan informasi statis. Ini sangat berguna untuk modul pembelajaran. Karena kita akan memanfaatkan server. Maka, setiap asisten harus bisa menguasai alur kerja memasang modul pembelajaran ke server.
+Untuk mempersingkat penyebutan, informasi memasang informasi ke server kita sebut **deploy**.
+
+Alur **Deployment** ini cukup memerlukan kurva belajar. Sistem yang otomatis sebenarnya tersedia untuk standar industri. Mungkin kedepannya bisa dibuatkan satu script batch/bash sederhana (misal `deploy.sh`) yang isinya cuma urutan perintah. Tapi untuk modul pembelajaran, cara manual memang terbaik agar kalian paham konsepnya.
+
+#### Mengapa "Ribet" itu Perlu? (Strategi Dua Branch)
+
+Mungkin kalian bertanya, "Kenapa tidak satu branch saja? Kenapa harus render, pindah file, ganti branch, lalu paste?". Jawabannya ada pada **efisiensi memori Git**.
+
+Git mencatat setiap perubahan, sekecil apapun.
+File hasil render (`.html`, `.js` hasil kompilasi, atau folder `site_libs`) adalah file yang baris kodenya sangat banyak dan sering berubah drastis meskipun kita hanya mengganti satu kata di materi.
+
+Jika kita mencampur file mentah (`.qmd`) dan file hasil (`.html`) dalam satu history branch yang sama:
+
+1. **Repository akan "Bengkak"**: Ukuran repo akan meledak dalam hitungan bulan karena Git menyimpan riwayat perubahan file `html` yang sebenarnya tidak perlu kita lacak (track).
+
+2. **Konflik yang Tidak Perlu**: Sering terjadi konflik (merge conflict) pada file sistem yang dihasilkan otomatis.
+
+Oleh karena itu, di Laboratorium Matematika, kita menggunakan **Strategi Dua Branch**:
+
+1. **Branch Materi**: Kita letakkan di branch `main`. Isinya hanya file mentah (`.qmd`, `.yml`) dan gambar sumber meskipun tidak direkomendasikan (nanti akan dijelaskan cara menyimpan gambar dengan baik).
+
+2. **Branch Website**: Nama branch website. Isinya hanya hasil jadi (index.html, folder docs/). Ini adalah apa yang dilihat pengunjung.
+
+#### Mulai Cepat ~ Quick Start
+
+Hal-hal yang paling penting dalam komunikasi via text adalah menulis. Bagaimana bisa menulis di Quarto Markdown? Itu adalah pertanyaan yang akan terjawab di modul ini.
+
+Untuk memulai, hal penting adalah samakan tools yang kita miliki. Ada beberapa tools yang digunakan dari menulis materi, push & collaboration, optimasi unggahan gambar, dan masih banyak lagi. Secara beriringan akan disampaikan (tidak sekarang). 
+
+Pertama-tama ialah tools quarto itu sendiri. Berikut prosedur yang harus dilaksanakan.
+
+1. Pertama rujuk website berikut. [Memulai Quarto](https://quarto.org/docs/get-started/)
+
+Di website tersebut ada prerequisity tools (alat prasyarat) yang digunakan untuk menulis website.
+
+Silahkan ikuti stepnya. Untuk melatih dalam mengajar. Kita akan mempraktikan salah satu syarat komentar dalam buku [R For Data Science Chapter 2 halaman 34](https://r4ds.hadley.nz/workflow-basics.html#comments).
+
+::: {.callout-tip}
+## Best Practice
+Use comments to explain the why of your code, not the how or the what. The what and how of your code are always possible to figure out...
+:::
+
+oke, kita akan terapkan.
+
+**Step 1: Install Quarto CLI**
+
+Mengapa (dan apa bagi yang tidak tau CLI)? 
+
+CLI atau *Command Line Interface* secara harfiah berarti Tampilan Perintah Baris adalah aplikasi terminal yang terintgrasi dengan Operating System Komputer kalian. Tujuan install itu untuk membuat terminal default kalian (eg. windows adalah PowerShell) bisa mengakses perintah quarto.
+
+**Apa pentingnya?**
+
+Kita akan cenderung mempelajari dan membiasakan menggunakan terminal melalui CLI kalian masing-masing. Kalau tampilan button tinggal pencet (atau Graphical User Interface GUI) itu secara alami mata kita bisa melihat visual dan fungsi dari ditekannya tombol itu. Meskipun teks terminal bisa secara intuisi dapat dipahami dari membaca dokumentasi maksud perintahnya. Tapi, ringkasan perintah apa yang penting dan berguna bisa diturunkan dari pengguna satu ke pengguna lain.
+
+**Step 2: Pilih Integrated Development Environment, IDE, yang kalian gunakan.**
+
+Pilih IDE yang kalian gunakan, kendati demikian sangat disarankan untuk menggunakan RStudio atau Visual Studio Code.
+
+**Mengapa?**
+
+Catatan ini erat kaitannya dengan lingkungan RStudio dan Visual Studio Code.
+
+Sekarang, karena mayoritas penggunaan untuk anak Matematika adalah Visual Studio Code & anak Statistika-Aktuaria menggunakan RStudio. Maka, sangat disarankan untuk memulai baca lengkap halaman [RStudio](https://quarto.org/docs/get-started/hello/rstudio.html) & halaman [Visual Studio Code](https://quarto.org/docs/get-started/hello/vscode.html).
+
+Cukup membaca & mengamalkan salah satu dari panduan di masing-masing halaman maka kalian sudah bisa dapat membuat dan mengenali pola membuat website. 
+
+---
+
+Setelah kalian membaca panduan instalasi di atas, mungkin kalian merasa "banjir informasi". Jangan panik.
+
+Untuk memulai, kalian hanya perlu melatih mata untuk mengenali **3 Pola Utama** dalam struktur file Quarto. Ini adalah kunci agar tidak tersesat.
+
+1. File `*.qmd` untuk memulai biasanya di tandai pertama kali oleh header yaml.
+
+Setiap kali kalian membuka file berekstensi `.qmd`, hal pertama yang harus dicari adalah **text Header** di baris paling atas. Cirinya adalah diapit oleh tiga garis hubung (`---`).
+
+```text
+---
+title: "Judul Halaman"
+Author: "Muhammad Zaki"
+format: html
+---
+```
+
+- **Fungsinya**: Memberi tahu Quarto judul halaman ini apa, siapa penulisnya, dan mau dijadikan output apa (HTML/PDF).
+- **Aturan**: Jangan pernah menghapus garis `---` ini, atau halaman akan error.
+- **Perhatian**: Terkadang, ketika kita ngoding dan bahasa pemograman yang kita gunakan merupakan high level langguage. Maka, ia memberikan detail lokasi di*line* mana lokasi error kita berada. Meskipun R Package mayoritas itu high level langguage. Namun, Jika yang error merupakan garis `---` dari pembuka YAML. Maka, pesan errornya bisa meleset. Jadi, kita tidak tau persis errornya itu dimana letaknya. 
+
+Jadi, perhatikan untuk garis `---` harus benar-benar ada pembuka dan penutup & tepat sebelum penutup **jangan** ada jarak.
+
+Contoh benar seperti contoh di atas.
+
+Sedangkan, contoh salah yang memiliki jarak adalah sebagai berikut.
+
+```yaml
+---
+title: "Judul Halaman"
+Author: "Muhammad Zaki"
+format: html
+
+---
+```
+
+2. Pola File Konfigurasi (`_quarto.yml`)
+
+Jika kalian melihat file bernama _quarto.yml di folder utama (root), itu adalah pusat pengaturan global.
+
+```yaml
+project:
+  type: website
+
+website:
+  title: "Lab Matematika"
+  sidebar:
+    style: "docked"
+    contents:
+      - section: "Modul 1"
+        contents:
+          - post/01-filosofi-persiapan.qmd
+```
+
+- **Fungsinya**: Mengatur menu navigasi (sidebar), tema warna, dan struktur website.
+
+- **Penting**: Jika kalian membuat file materi baru tapi **lupa mendaftarkannya** di sini, materi tersebut tidak akan muncul di menu samping website (sidebar), meskipun filenya ada.
+
+- **Perhatian**: file plugin eksternal bisa diinstall disini. Tapi, biasanya render dijalankan di local. Jadi, senantiasa periksa yaml utama jika ada plugin yang diperlukan untuk halaman tertentu ya.
+
+3. Pola Blok Kode (Code Chunks)
+
+Di dalam file `.qmd`, kalian akan menemukan area yang warnanya sedikit berbeda di text editor, biasanya diawali dengan tiga backticks dan huruf `{r}` atau `{python}`.
+
+````text
+```r
+#| echo: false
+2 + 2
+```
+````
+
+* **Fungsinya:** Kode di dalam kotak ini akan DIJALANKAN oleh komputer saat proses render.
+
+* **Hati-hati:** Jangan menulis narasi/teks biasa di dalam blok ini, karena akan dianggap sebagai kode program dan menyebabkan error.
+
+➡️ Lanjut ke **[Bab 2: Panduan Menulis Materi](02-menulis-materi.qmd)**

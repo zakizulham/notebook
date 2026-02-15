@@ -1,0 +1,102 @@
+---
+title: "Bab 4: Manajemen Arsip & Submodule"
+author: "Muhammad Zaki Zulhamlizar"
+date: 2026-02-15
+toc: true
+---
+
+<!-- # Manajemen Arsip (The Infinite Bookshelf) -->
+
+Salah satu penyakit utama *repository* laboratorium adalah penumpukan file selama bertahun-tahun. Jika materi tahun 2020, 2021, hingga 2025 ditumpuk dalam satu repo, ukuran file akan membengkak (*bloat*) dan proses *clone* akan sangat lambat.
+
+Solusinya? Kita memecah setiap tahun ajaran menjadi *repository* terpisah, lalu menghubungkannya menggunakan teknologi kuno namun sakti bernama **Git Submodules**.
+
+## 1. Konsep Rak Buku (The Mental Model)
+
+Bayangkan *repository* utama (`Lab-Matematika`) ini sebagai sebuah **Rak Buku**.
+Sedangkan materi per tahun (`Materi-2024`, `Materi-2025`) adalah **Buku-bukunya**.
+
+Saat kalian melihat folder `2024/` di dalam repo ini, folder tersebut sebenarnya hanyalah sebuah "Link" atau "Penanda" yang mengarah ke gudang penyimpanan lain.
+
+```{mermaid}
+%%| echo: false
+graph TD
+    A[Repo Utama: Lab-Matematika] -->|Submodule Link| B[Repo: Materi-2024]
+    A -->|Submodule Link| C[Repo: Materi-2025]
+    A -->|Submodule Link| D[Repo: Materi-2026]
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#ccf,stroke:#333
+    style C fill:#ccf,stroke:#333
+    style D fill:#ccf,stroke:#333
+```
+
+**Keuntungan:**
+1.  Repo utama tetap ringan (hanya hitungan Kilobyte).
+2.  Jika asisten tahun 2026 membuat kesalahan, materi tahun 2024 tidak akan ikut rusak.
+
+## 2. Masalah Klasik: "Folder Saya Kosong!"
+
+Ini adalah jebakan nomor satu bagi asisten baru.
+Saat kalian melakukan `git clone` biasa pada repo utama, folder submodule (`2024/`, `2025/`) akan terlihat **KOSONG**.
+
+Kenapa? Karena Git secara *default* hanya mengambil rak bukunya, bukan isinya.
+
+### Solusi (Cara Clone yang Benar)
+Jika kalian baru pertama kali mengunduh repo ini, gunakan perintah sakti:
+
+```bash
+git clone --recurse-submodules [https://github.com/username/Lab-Matematika.git](https://github.com/username/Lab-Matematika.git)
+```
+
+### Solusi (Jika Sudah Terlanjur Clone Biasa)
+Jika kalian sudah *clone* dan mendapati foldernya kosong, jalankan dua mantra ini di terminal:
+
+```bash
+# Mendaftarkan submodule ke konfigurasi lokal
+git submodule init
+
+# Mengunduh isi materi dari repo anak
+git submodule update
+```
+
+## 3. Ritual Tahunan (Menambah Arsip Baru)
+
+Bagian ini biasanya dilakukan oleh Koordinator Asisten saat pergantian tahun ajaran atau semester.
+
+Misalkan kita ingin menambahkan materi tahun baru dari repo terpisah.
+
+1.  Pastikan kalian berada di *root folder* repo utama.
+2.  Gunakan perintah `git submodule add`:
+    ```bash
+    # Format: git submodule add <URL Repo Anak> <Nama Folder Tujuan>
+    git submodule add [https://github.com/username/Materi-2027.git](https://github.com/username/Materi-2027.git) arsip/2027
+    ```
+3.  Git akan otomatis mengunduh repo tersebut dan membuat folder `arsip/2027`.
+4.  Lakukan *commit* untuk menyimpan perubahan pada "Rak Buku" kita:
+    ```bash
+    git add .
+    git commit -m "Menambahkan arsip materi tahun 2027"
+    git push origin main
+    ```
+
+## 4. Aturan Emas (Do's and Don'ts)
+
+Karena submodule ini sedikit rumit, patuhi aturan berikut agar tidak pusing:
+
+::: {.callout-important}
+## JANGAN LAKUKAN INI
+Jangan pernah mengedit materi submodule (misal: mengedit file di dalam folder `arsip/2024/`) **dari dalam repo utama**.
+:::
+
+**Cara yang Benar Mengedit Arsip Lama:**
+1.  Buka repo asli `Materi-2024` secara terpisah (di jendela VS Code baru).
+2.  Edit dan *push* di sana.
+3.  Kembali ke repo utama, lalu jalankan `git submodule update --remote` jika ingin menyamakan versi.
+
+---
+
+**Sistem sudah rapi, arsip aman.**
+Namun, secanggih apapun sistemnya, masalah pasti akan muncul. Entah itu konflik *merge* atau gambar yang hilang entah kemana.
+
+➡️ Lanjut ke **[Bab 5: Troubleshooting & FAQ](05-troubleshooting.qmd)**

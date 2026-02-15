@@ -1,0 +1,42 @@
+---
+title: "Notebook"
+author: "Muhammad Zaki Zulhamlizar"
+format: html
+---
+
+<!-- # Notebook -->
+
+## Panduan Praktis & Maintenance Digital Lab Matematika
+
+Selamat datang di pusat dokumentasi perawatan dan pengembangan aset digital Laboratorium Matematika. Modul ini telah disusun secara modular untuk memudahkan proses *onboarding* asisten baru.
+
+Silakan akses materi pembelajaran berdasarkan topik di bawah ini:
+
+### Daftar Modul Pembelajaran
+
+* **[Bab 1: Filosofi & Persiapan](post/01-filosofi_persiapan.qmd)**
+    * Memahami alasan penggunaan Quarto & GitHub Pages.
+    * Mental Model: Strategi "Dapur" vs "Etalase".
+    * Instalasi *tools* wajib (VS Code, Quarto CLI, Git).
+
+* **[Bab 2: Panduan Menulis Materi](post/02-menulis-materi.qmd)**
+    * Standar penulisan Markdown & LaTeX di Lab.
+    * Anatomi YAML Header.
+    * Cara melakukan *preview* materi di lokal.
+
+* **[Bab 3: Ritual Deployment](post/03-deployment.qmd)**
+    * **PENTING:** Prosedur manual *deploy* yang aman.
+    * Langkah-langkah: Render $\rightarrow$ Move $\rightarrow$ Switch Branch $\rightarrow$ Push.
+    * Menjaga repo tetap ringan dan bersih.
+
+* **[Bab 4: Manajemen Arsip & Submodule](post/04-manajemen-arsip.qmd)**
+    * Mengelola materi antar tahun ajaran agar tidak menumpuk.
+    * Konsep Git Submodules sebagai "rak buku".
+
+* **[Bab 5: Troubleshooting & FAQ](post/05-troubleshooting.qmd)**
+    * Pertolongan pertama pada *error* (Git conflict, gambar hilang).
+    * Kontak darurat dan *maintenance*.
+
+---
+
+> *Catatan: Modul ini bersifat hidup (living document). Jika menemukan cara kerja yang lebih efisien, silakan ajukan revisi melalui Pull Request.*

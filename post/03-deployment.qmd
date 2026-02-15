@@ -1,0 +1,109 @@
+---
+title: "Bab 3: Ritual Deployment"
+author: "Muhammad Zaki Zulhamlizar"
+date: 2026-02-15
+toc: true
+---
+
+kembali ke [halaman utama](../index.qmd)
+
+<!-- # Ritual Deployment (The Sacred Workflow) -->
+
+Ini adalah bagian paling krusial dan berbahaya. Salah langkah di sini bisa menyebabkan materi hilang atau website *down*.
+
+Karena kita menggunakan metode manual untuk menjaga kebersihan *repository*, proses *deployment* membutuhkan kedisiplinan urutan langkah. Jangan melompat.
+
+## Peta Alur Kerja
+
+Sebelum mengetik perintah, pahami dulu aliran data yang akan kalian lakukan:
+
+```{mermaid}
+%%| echo: false
+flowchart LR
+    A[Branch: main] -->|1. Quarto Render| B(Folder: docs/)
+    B -->|2. Cut/Move| C[Tempat Aman/Luar Repo]
+    C -->|3. Git Checkout| D[Branch: site]
+    D -->|4. Paste & Replace| E[Folder Website]
+    E -->|5. Git Push| F((GitHub Pages))
+```
+
+## Langkah Demi Langkah
+
+Pastikan kalian sudah selesai menulis materi di branch utama (`main` atau `master`) dan sudah melakukan *commit* untuk menyimpan perubahan mentah (`.qmd`).
+
+### Fase 1: Produksi (Render)
+
+Langkah pertama adalah mengubah kode `.qmd` menjadi HTML statis.
+
+1.  Pastikan terminal berada di folder *root* repository.
+2.  Jalankan perintah:
+    ```bash
+    quarto render
+    ```
+3.  Tunggu hingga proses selesai. Folder baru bernama `docs/` (atau nama output lain sesuai konfigurasi `_quarto.yml`) akan muncul atau diperbarui.
+
+### Fase 2: Evakuasi (Move)
+
+**⚠️ PERINGATAN:** Jangan langsung pindah branch!
+
+Jika kalian pindah branch sekarang, folder `docs/` yang baru saja dibuat bisa tertimpa atau malah terbawa ke branch sebelah dan menyebabkan konflik.
+
+1.  Buka File Explorer/Finder.
+2.  Cari folder `docs/` hasil render tadi.
+3.  **Cut (Potong)** atau **Copy** folder tersebut.
+4.  **Paste** di tempat aman **DI LUAR** folder repository ini (Misalnya: di Desktop atau folder `Downloads/temp`).
+    * *Kenapa?* Karena saat kita ganti branch, semua isi folder kerja akan berubah total mengikuti isi branch tujuan. Kita harus menyelamatkan hasil render ini dulu.
+
+### Fase 3: Pindah Dimensi (Switch Branch)
+
+Sekarang, kita tinggalkan mode "Menulis" dan masuk ke mode "Publikasi".
+
+1.  Kembali ke terminal.
+2.  Pindah ke branch situs:
+    ```bash
+    git checkout site
+    ```
+    *(Sesuaikan `site` dengan nama branch website kalian, misal `gh-pages`)*.
+
+3.  Perhatikan file di Explorer kalian. File `.qmd` akan menghilang, digantikan oleh struktur file website. Jangan panik, itu normal.
+
+### Fase 4: Penempatan (Paste)
+
+1.  Ambil folder `docs/` yang tadi kalian amankan di Desktop/Temp.
+2.  **Paste** ke dalam folder repository yang sekarang sedang di branch `site`.
+3.  Jika ditanya "Replace files?", pilih **YES/REPLACE ALL**.
+4.  Pastikan struktur foldernya sesuai. File `index.html` harus berada di posisi yang tepat agar terbaca oleh GitHub Pages.
+
+### Fase 5: Publikasi (Push)
+
+Langkah terakhir adalah mengirim perubahan ini ke server GitHub.
+
+1.  Cek status perubahan:
+    ```bash
+    git status
+    ```
+    *Kalian harusnya melihat daftar file HTML yang termodifikasi.*
+
+2.  Lakukan ritual Git standar:
+    ```bash
+    git add .
+    git commit -m "Update materi: Modul X"
+    git push origin site
+    ```
+
+### Fase 6: Kembali ke Markas (Cleanup)
+
+Jangan tinggalkan terminal kalian di branch `site`. Kembalilah ke branch utama agar siap untuk penulisan berikutnya.
+
+```bash
+git checkout main
+```
+
+---
+
+**Selamat!** Materi kalian sudah mengudara.
+Cek alamat website lab untuk memastikan perubahan sudah tampil (biasanya butuh 1-2 menit).
+
+Jika terjadi masalah seperti "Halaman 404" atau "Gambar Pecah", segera buka bab selanjutnya.
+
+➡️ Lanjut ke **[Bab 4: Manajemen Arsip & Submodule](04-manajemen-arsip.qmd)**

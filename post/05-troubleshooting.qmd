@@ -1,0 +1,98 @@
+---
+title: "Bab 5: Troubleshooting & FAQ"
+author: "Muhammad Zaki Zulhamlizar"
+date: 2026-02-15
+toc: true
+---
+
+<!-- # Troubleshooting (Kotak P3K) -->
+
+Di dunia *programming*, error itu seperti bumbu dapur. Pasti ada. Jangan panik.
+Halaman ini berisi solusi untuk masalah paling umum yang sering membuat asisten baru keringat dingin.
+
+## 1. Masalah Git & GitHub
+
+### Kasus: "Saya kena Merge Conflict!"
+**Gejala:** Saat `git pull` atau `git push`, muncul pesan merah *CONFLICT (content): Merge conflict in...*
+
+**Penyebab:** Ada dua orang mengedit baris yang sama di file yang sama pada waktu bersamaan.
+
+**Solusi:**
+1.  Buka file yang bermasalah di VS Code.
+2.  Cari tanda `<<<<<<< HEAD`, `=======`, dan `>>>>>>>`.
+    ```markdown
+    <<<<<<< HEAD
+    Materi ini ditulis oleh Zaki.
+    =======
+    Materi ini ditulis oleh Budi.
+    >>>>>>> abcd123
+    ```
+3.  **Pilih salah satu.** Hapus tanda-tanda panah dan garis pembatas itu, sisakan teks yang benar.
+4.  Simpan file.
+5.  Lakukan `git add .`, `git commit`, dan `git push` lagi.
+
+### Kasus: "Folder submodule saya kosong!"
+**Gejala:** Folder tahun lalu (misal `arsip/2024`) ada, tapi isinya nol besar.
+
+**Solusi:**
+Kalian lupa mantra pemanggil arwah submodule. Jalankan ini di terminal:
+```bash
+git submodule update --init --recursive
+```
+
+## 2. Masalah Tampilan Web (Quarto)
+
+### Kasus: "Gambar tidak muncul (Broken Image)"
+**Gejala:** Di web hanya muncul ikon gambar pecah atau teks `alt`.
+
+**Penyebab:** Jalur (*path*) file salah.
+
+**Solusi:**
+1.  Pastikan nama file gambar **tidak mengandung spasi**.
+    * ❌ `grafik fungsi.png`
+    * ✅ `grafik-fungsi.png`
+2.  Cek jalur relatifnya.
+    * Jika file `.qmd` ada di dalam folder `post/`, dan gambar ada di `post/images/`, panggil dengan: `images/namagambar.png`.
+    * Jika gambar ada di folder utama `images/` (di luar `post/`), panggil dengan: `../images/namagambar.png` (`..` artinya naik satu folder).
+
+### Kasus: "Rumus Matematika tidak jadi (Masih bentuk $...$)"
+**Gejala:** Persamaan LaTeX tidak berubah jadi simbol matematika yang cantik.
+
+**Penyebab:** Biasanya ada spasi antara tanda dolar `$` dan teksnya.
+
+**Solusi:**
+* ❌ Salah: `$ x^2 + y^2 = r^2 $` (Ada spasi di awal/akhir)
+* ✅ Benar: `$x^2 + y^2 = r^2$` (Rapat)
+
+## 3. Masalah Deployment
+
+### Kasus: "Halaman 404 Not Found"
+**Gejala:** Setelah deploy, web dibuka muncul tulisan 404 GitHub.
+
+**Penyebab:**
+1.  Salah *branch* di pengaturan GitHub Pages.
+2.  File `index.html` tidak ada di folder paling luar (*root*) pada branch `site`.
+
+**Solusi:**
+1.  Buka Repo di GitHub -> **Settings** -> **Pages**.
+2.  Pastikan **Build and deployment** bersumber dari **Deploy from a branch**.
+3.  Pastikan **Branch** yang dipilih adalah `site` (atau `gh-pages`) dan foldernya `/ (root)`.
+4.  Cek branch `site` kalian, pastikan `index.html` ada di luar, bukan tersembunyi di dalam folder `docs/`.
+
+## 4. Kontak Darurat (Emergency Call)
+
+Jika kalian sudah mencoba solusi di atas dan masih buntu (stuck lebih dari 1 jam), jangan buang waktu. Segera hubungi bantuan.
+
+**Hirarki Bertanya:**
+1.  **Google / ChatGPT / Gemini:** Copy paste pesan error kalian. 90% solusi ada di sana.
+2.  **Rekan Sesama Asisten:** "Eh, lu pernah error gini gak?"
+3.  **Koordinator Asisten (Head Lab):** Bawa screenshot error dan jelaskan apa yang sudah kalian coba.
+4.  **Mantan Koordinator (Alumni):** Opsi terakhir jika masalah menyangkut struktur inti repo.
+
+---
+
+::: {.callout-tip}
+## Pesan Penutup
+*Maintenance* itu membosankan, tapi tanpanya, rumah kita akan roboh.
+Terima kasih sudah merawat aset digital Laboratorium Matematika. Selamat berkarya!
+:::

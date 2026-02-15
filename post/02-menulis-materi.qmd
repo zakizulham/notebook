@@ -1,0 +1,126 @@
+---
+title: "Bab 2: Panduan Menulis Materi"
+author: "Muhammad Zaki Zulhamlizar"
+date: 2026-02-15
+toc: true
+---
+
+kembali ke [halaman utama](../index.qmd)
+
+<!-- # Bab 2: Panduan Menulis Materi -->
+
+Bab ini berisi standar penulisan agar materi yang kalian buat konsisten, mudah dibaca, dan tidak menyebabkan *error* saat di-*deploy*.
+
+Secara umum, intinya setiap asisten Laboratorium diharapkan dapat mampu mengomunikasikan kemampuannya dengan baik kepada para peserta. Kendati mereka akan belajar sendiri, setidaknya kita beri mereka pemantik dan konsep dasar kata kunci apa yang mereka dapat pelajari. Jadi, kita akan mempelajari:
+
+- Cara Menuliskan Materi dengan output berupa html.
+- Cara Unggah Hasil dari output html tersebut dan pasang (deploy) di github Pages.
+
+Namun, beberapa hal optimasi di github asisten lab membuat kurva pembelajaran yang cukup untuk benar-benar menguasainnya. Gambaran umum yang harus dikuasai adalah sebagai berikut.
+
+## 1. Anatomi File `.qmd`
+
+Setiap file materi harus diawali dengan **YAML Header**. Ini adalah "KTP" dari file tersebut. Tanpa ini, Quarto bingung cara memprosesnya.
+
+Copy template ini untuk setiap file baru:
+
+```yaml
+---
+title: "Judul Materi (Misal: Modul 01 - Pengantar Aljabar)"
+author: "Nama Asisten"
+date: "YYYY-MM-DD"
+categories: [Aljabar, S1, Modul]
+format: 
+  html:
+    toc: true
+    code-fold: true
+---
+```
+
+**Penjelasan:**
+
+* `title`: Judul yang akan muncul paling besar di halaman web.
+* `categories`: Label untuk memudahkan pencarian (filter) di halaman depan.
+* `toc: true`: Menampilkan *Table of Contents* (Daftar Isi) otomatis di sebelah kanan. Sangat wajib untuk modul yang panjang.
+
+## 2. SOP Penamaan File & Folder
+
+Ini adalah aturan paling krusial untuk menjaga kerapian repo jangka panjang.
+
+### Aturan Penamaan File
+Gunakan format **kebab-case** (huruf kecil semua, dipisah tanda hubung).
+* ✅ Benar: `01-pengantar-r.qmd`
+* ❌ Salah: `01 Pengantar R.qmd` (Spasi bikin link error)
+* ❌ Salah: `MateriBaruBanget.qmd` (Huruf besar bisa bikin error di server Linux/GitHub)
+
+### Manajemen Gambar
+Jangan asal tempel (*paste*) gambar! Gambar yang hilang (broken link) adalah aib sebuah website.
+1.  Buat folder bernama `images/` di samping file `.qmd` kalian.
+2.  Simpan gambar di situ dengan nama yang jelas (misal: `grafik-fungsi.png`).
+3.  Panggil gambar dengan sintaks:
+    ```markdown
+    ![Keterangan Gambar (Alt Text)](images/grafik-fungsi.png)
+    ```
+
+## 3. Senjata Penulisan (Syntax Wajib)
+
+Sebagai anak Matematika/Statistika, kita butuh lebih dari sekadar teks biasa.
+
+### A. Matematika (LaTeX)
+Quarto mendukung MathJax secara *native*.
+* **Inline (di dalam kalimat):** Gunakan satu dolar `$`.
+    * Ketikan: `Misalkan $f(x) = x^2$`
+    * Hasil: Misalkan $f(x) = x^2$
+* **Display (blok persamaan):** Gunakan dua dolar `$$`.
+    * Ketikan: `$$\int_0^\infty e^{-x} dx = 1$$`
+    * Hasil: 
+    $$\int_0^\infty e^{-x} dx = 1$$
+
+### B. Callouts (Kotak Peringatan/Catatan)
+Gunakan fitur ini untuk menonjolkan definisi, peringatan, atau tips penting. Jangan cuma pakai *bold*.
+
+```markdown
+::: {.callout-note}
+## Definisi
+Matriks adalah susunan bilangan, simbol, atau ekspresi...
+:::
+
+::: {.callout-tip}
+## Tips
+Gunakan shortcut `Alt + -` untuk membuat tanda panah di RStudio.
+:::
+```
+
+### C. Code Chunks (Menampilkan Kode)
+Untuk materi praktikum (R/Python), kita perlu menampilkan kode dan hasilnya.
+
+```r
+#| label: load-data
+#| warning: false
+
+library(tidyverse)
+summary(mtcars)
+```
+
+**Opsi Penting (`#|`):**
+* `#| echo: true` -> Menampilkan kode di web (Default).
+* `#| echo: false` -> Menyembunyikan kode, hanya menampilkan hasil (grafik/tabel).
+* `#| eval: false` -> Menampilkan kode tapi **tidak dijalankan** (cocok untuk contoh kode yang berat atau pseudo-code).
+
+## 4. Ritual Pratinjau (Preview)
+
+**HUKUM WAJIB:** Jangan pernah melakukan *commit* atau *deploy* sebelum melihat hasilnya di lokal. Apa yang terlihat benar di kode, belum tentu rapi di HTML.
+
+### Cara Preview:
+1.  **VS Code:** Klik tombol **"Preview"** di pojok kanan atas, atau tekan `Ctrl + Shift + K`.
+2.  **Terminal:** Ketik perintah:
+    ```bash
+    quarto preview nama-file.qmd
+    ```
+
+Pastikan:
+1.  Gambar muncul.
+2.  Persamaan matematika ter-render dengan benar.
+3.  Tabel tidak terpotong.
+
+➡️ Lanjut ke **[Bab 3: Ritual Deployment](03-deployment.qmd)**
