@@ -19,12 +19,30 @@ Sebelum mengetik perintah, pahami dulu aliran data yang akan kalian lakukan:
 
 ```{mermaid}
 %%| echo: false
-flowchart LR
-    A[Branch: main] -->|1. Quarto Render| B(Folder: docs/)
-    B -->|2. Cut/Move| C[Tempat Aman/Luar Repo]
-    C -->|3. Git Checkout| D[Branch: site]
-    D -->|4. Paste & Replace| E[Folder Website]
-    E -->|5. Git Push| F((GitHub Pages))
+flowchart TD
+    subgraph Dapur["🍳 Branch: main"]
+        A["① Menulis .qmd"] --> B["② quarto render"]
+        B --> C["③ Folder docs/ terbentuk"]
+    end
+
+    subgraph Transit["📦 Zona Transit - Luar Repo"]
+        D["④ Cut/Copy docs/ ke Desktop"]
+    end
+
+    subgraph Etalase["🌐 Branch: site"]
+        E["⑤ git checkout site"]
+        E --> F["⑥ Paste dan Replace docs/"]
+        F --> G["⑦ git add, commit, push"]
+    end
+
+    C --> D
+    D --> E
+    G --> H["✅ Website Live!"]
+
+    style Dapur fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+    style Transit fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    style Etalase fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    style H fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
 ```
 
 ## Langkah Demi Langkah
@@ -37,6 +55,7 @@ Langkah pertama adalah mengubah kode `.qmd` menjadi HTML statis.
 
 1.  Pastikan terminal berada di folder *root* repository.
 2.  Jalankan perintah:
+    
     ```bash
     quarto render
     ```
@@ -60,6 +79,7 @@ Sekarang, kita tinggalkan mode "Menulis" dan masuk ke mode "Publikasi".
 
 1.  Kembali ke terminal.
 2.  Pindah ke branch situs:
+    
     ```bash
     git checkout site
     ```
@@ -79,12 +99,15 @@ Sekarang, kita tinggalkan mode "Menulis" dan masuk ke mode "Publikasi".
 Langkah terakhir adalah mengirim perubahan ini ke server GitHub.
 
 1.  Cek status perubahan:
+    
     ```bash
     git status
     ```
+    
     *Kalian harusnya melihat daftar file HTML yang termodifikasi.*
 
 2.  Lakukan ritual Git standar:
+    
     ```bash
     git add .
     git commit -m "Update materi: Modul X"
@@ -98,6 +121,25 @@ Jangan tinggalkan terminal kalian di branch `site`. Kembalilah ke branch utama a
 ```bash
 git checkout main
 ```
+
+---
+
+## Cheat Sheet: Ringkasan Perintah Deploy
+
+::: {.callout-tip}
+## Contekan Cepat
+Setelah kalian paham konsep di atas, gunakan ringkasan ini sebagai rujukan cepat saat deploy.
+:::
+
+| Langkah | Aksi | Perintah / Lokasi |
+|:---:|---|---|
+| 1 | Commit perubahan `.qmd` | `git add .` → `git commit -m "..."` |
+| 2 | Render ke HTML | `quarto render` |
+| 3 | Pindahkan `docs/` keluar repo | **File Explorer** → Cut ke Desktop |
+| 4 | Pindah branch | `git checkout site` |
+| 5 | Paste `docs/` ke repo | **File Explorer** → Paste & Replace |
+| 6 | Push ke GitHub | `git add .` → `git commit -m "..."` → `git push origin site` |
+| 7 | Kembali ke branch utama | `git checkout main` |
 
 ---
 

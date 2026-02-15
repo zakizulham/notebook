@@ -157,6 +157,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#fase-5-publikasi-push" id="toc-fase-5-publikasi-push" class="nav-link" data-scroll-target="#fase-5-publikasi-push">Fase 5: Publikasi (Push)</a></li>
   <li><a href="#fase-6-kembali-ke-markas-cleanup" id="toc-fase-6-kembali-ke-markas-cleanup" class="nav-link" data-scroll-target="#fase-6-kembali-ke-markas-cleanup">Fase 6: Kembali ke Markas (Cleanup)</a></li>
   </ul></li>
+  <li><a href="#cheat-sheet-ringkasan-perintah-deploy" id="toc-cheat-sheet-ringkasan-perintah-deploy" class="nav-link" data-scroll-target="#cheat-sheet-ringkasan-perintah-deploy">Cheat Sheet: Ringkasan Perintah Deploy</a></li>
   </ul>
 </nav>
     </div>
@@ -206,12 +207,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
-    A[Branch: main] --&gt;|1. Quarto Render| B(Folder: docs/)
-    B --&gt;|2. Cut/Move| C[Tempat Aman/Luar Repo]
-    C --&gt;|3. Git Checkout| D[Branch: site]
-    D --&gt;|4. Paste &amp; Replace| E[Folder Website]
-    E --&gt;|5. Git Push| F((GitHub Pages))
+<pre class="mermaid mermaid-js">flowchart TD
+    subgraph Dapur["🍳 Branch: main"]
+        A["① Menulis .qmd"] --&gt; B["② quarto render"]
+        B --&gt; C["③ Folder docs/ terbentuk"]
+    end
+
+    subgraph Transit["📦 Zona Transit - Luar Repo"]
+        D["④ Cut/Copy docs/ ke Desktop"]
+    end
+
+    subgraph Etalase["🌐 Branch: site"]
+        E["⑤ git checkout site"]
+        E --&gt; F["⑥ Paste dan Replace docs/"]
+        F --&gt; G["⑦ git add, commit, push"]
+    end
+
+    C --&gt; D
+    D --&gt; E
+    G --&gt; H["✅ Website Live!"]
+
+    style Dapur fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+    style Transit fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    style Etalase fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    style H fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -226,9 +245,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="fase-1-produksi-render">Fase 1: Produksi (Render)</h3>
 <p>Langkah pertama adalah mengubah kode <code>.qmd</code> menjadi HTML statis.</p>
 <ol type="1">
-<li>Pastikan terminal berada di folder <em>root</em> repository.</li>
-<li>Jalankan perintah: <code>bash     quarto render</code></li>
-<li>Tunggu hingga proses selesai. Folder baru bernama <code>docs/</code> (atau nama output lain sesuai konfigurasi <code>_quarto.yml</code>) akan muncul atau diperbarui.</li>
+<li><p>Pastikan terminal berada di folder <em>root</em> repository.</p></li>
+<li><p>Jalankan perintah:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Tunggu hingga proses selesai. Folder baru bernama <code>docs/</code> (atau nama output lain sesuai konfigurasi <code>_quarto.yml</code>) akan muncul atau diperbarui.</p></li>
 </ol>
 </section>
 <section id="fase-2-evakuasi-move" class="level3">
@@ -250,7 +270,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Sekarang, kita tinggalkan mode “Menulis” dan masuk ke mode “Publikasi”.</p>
 <ol type="1">
 <li><p>Kembali ke terminal.</p></li>
-<li><p>Pindah ke branch situs: <code>bash     git checkout site</code> <em>(Sesuaikan <code>site</code> dengan nama branch website kalian, misal <code>gh-pages</code>)</em>.</p></li>
+<li><p>Pindah ke branch situs:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout site</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>(Sesuaikan <code>site</code> dengan nama branch website kalian, misal <code>gh-pages</code>)</em>.</p></li>
 <li><p>Perhatikan file di Explorer kalian. File <code>.qmd</code> akan menghilang, digantikan oleh struktur file website. Jangan panik, itu normal.</p></li>
 </ol>
 </section>
@@ -267,21 +289,94 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="fase-5-publikasi-push">Fase 5: Publikasi (Push)</h3>
 <p>Langkah terakhir adalah mengirim perubahan ini ke server GitHub.</p>
 <ol type="1">
-<li><p>Cek status perubahan: <code>bash     git status</code> <em>Kalian harusnya melihat daftar file HTML yang termodifikasi.</em></p></li>
-<li><p>Lakukan ritual Git standar: <code>bash     git add .     git commit -m "Update materi: Modul X"     git push origin site</code></p></li>
+<li><p>Cek status perubahan:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>Kalian harusnya melihat daftar file HTML yang termodifikasi.</em></p></li>
+<li><p>Lakukan ritual Git standar:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Update materi: Modul X"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin site</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 </section>
 <section id="fase-6-kembali-ke-markas-cleanup" class="level3">
 <h3 class="anchored" data-anchor-id="fase-6-kembali-ke-markas-cleanup">Fase 6: Kembali ke Markas (Cleanup)</h3>
 <p>Jangan tinggalkan terminal kalian di branch <code>site</code>. Kembalilah ke branch utama agar siap untuk penulisan berikutnya.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="cheat-sheet-ringkasan-perintah-deploy" class="level2">
+<h2 class="anchored" data-anchor-id="cheat-sheet-ringkasan-perintah-deploy">Cheat Sheet: Ringkasan Perintah Deploy</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Contekan Cepat
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Setelah kalian paham konsep di atas, gunakan ringkasan ini sebagai rujukan cepat saat deploy.</p>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 27%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Langkah</th>
+<th>Aksi</th>
+<th>Perintah / Lokasi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td>Commit perubahan <code>.qmd</code></td>
+<td><code>git add .</code> → <code>git commit -m "..."</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td>Render ke HTML</td>
+<td><code>quarto render</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td>Pindahkan <code>docs/</code> keluar repo</td>
+<td><strong>File Explorer</strong> → Cut ke Desktop</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td>Pindah branch</td>
+<td><code>git checkout site</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td>Paste <code>docs/</code> ke repo</td>
+<td><strong>File Explorer</strong> → Paste &amp; Replace</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td>Push ke GitHub</td>
+<td><code>git add .</code> → <code>git commit -m "..."</code> → <code>git push origin site</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td>Kembali ke branch utama</td>
+<td><code>git checkout main</code></td>
+</tr>
+</tbody>
+</table>
 <hr>
 <p><strong>Selamat!</strong> Materi kalian sudah mengudara. Cek alamat website lab untuk memastikan perubahan sudah tampil (biasanya butuh 1-2 menit).</p>
 <p>Jika terjadi masalah seperti “Halaman 404” atau “Gambar Pecah”, segera buka bab selanjutnya.</p>
 <p>➡️ Lanjut ke <strong><a href="../post/04-manajemen-arsip.html">Bab 4: Manajemen Arsip &amp; Submodule</a></strong></p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

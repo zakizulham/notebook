@@ -61,6 +61,36 @@ Oleh karena itu, di Laboratorium Matematika, kita menggunakan **Strategi Dua Bra
 
 2. **Branch Website**: Nama branch website. Isinya hanya hasil jadi (index.html, folder docs/). Ini adalah apa yang dilihat pengunjung.
 
+#### Gambaran Besar: Alur Kerja dari Awal Sampai Akhir
+
+Sebelum masuk ke detail masing-masing langkah di bab-bab berikutnya, lihat dulu peta besar perjalanan materi kalian dari nol sampai tayang di web:
+
+```{mermaid}
+%%| echo: false
+flowchart LR
+    A["✍️ Tulis .qmd"] --> B["👁️ Preview Lokal"]
+    B --> C["📦 quarto render"]
+    C --> D["📂 Pindahkan docs/"]
+    D --> E["🔀 Switch Branch"]
+    E --> F["📋 Paste & Push"]
+    F --> G["🌐 Website Live!"]
+
+    style A fill:#e8f5e9,stroke:#4caf50
+    style B fill:#e8f5e9,stroke:#4caf50
+    style C fill:#fff3e0,stroke:#ff9800
+    style D fill:#fff3e0,stroke:#ff9800
+    style E fill:#e3f2fd,stroke:#2196f3
+    style F fill:#e3f2fd,stroke:#2196f3
+    style G fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+```
+
+::: {.callout-note}
+## Peta Warna
+- 🟢 **Hijau**: Tahap menulis (Bab 2)
+- 🟠 **Oranye**: Tahap render & persiapan (Bab 3)
+- 🔵 **Biru**: Tahap deploy ke GitHub Pages (Bab 3)
+:::
+
 #### Mulai Cepat ~ Quick Start
 
 Hal-hal yang paling penting dalam komunikasi via text adalah menulis. Bagaimana bisa menulis di Quarto Markdown? Itu adalah pertanyaan yang akan terjawab di modul ini.
@@ -86,7 +116,7 @@ oke, kita akan terapkan.
 
 Mengapa (dan apa bagi yang tidak tau CLI)? 
 
-CLI atau *Command Line Interface* secara harfiah berarti Tampilan Perintah Baris adalah aplikasi terminal yang terintgrasi dengan Operating System Komputer kalian. Tujuan install itu untuk membuat terminal default kalian (eg. windows adalah PowerShell) bisa mengakses perintah quarto.
+CLI atau *Command Line Interface* secara harfiah berarti Tampilan Perintah Baris adalah aplikasi terminal yang terintegrasi dengan Operating System Komputer kalian. Tujuan install itu untuk membuat terminal default kalian (eg. windows adalah PowerShell) bisa mengakses perintah quarto.
 
 **Apa pentingnya?**
 
@@ -124,7 +154,7 @@ format: html
 
 - **Fungsinya**: Memberi tahu Quarto judul halaman ini apa, siapa penulisnya, dan mau dijadikan output apa (HTML/PDF).
 - **Aturan**: Jangan pernah menghapus garis `---` ini, atau halaman akan error.
-- **Perhatian**: Terkadang, ketika kita ngoding dan bahasa pemograman yang kita gunakan merupakan high level langguage. Maka, ia memberikan detail lokasi di*line* mana lokasi error kita berada. Meskipun R Package mayoritas itu high level langguage. Namun, Jika yang error merupakan garis `---` dari pembuka YAML. Maka, pesan errornya bisa meleset. Jadi, kita tidak tau persis errornya itu dimana letaknya. 
+- **Perhatian**: Terkadang, ketika kita ngoding dan bahasa pemrograman yang kita gunakan merupakan high level language. Maka, ia memberikan detail lokasi di *line* mana lokasi error kita berada. Meskipun R Package mayoritas itu high level language. Namun, jika yang error merupakan garis `---` dari pembuka YAML. Maka, pesan errornya bisa meleset. Jadi, kita tidak tau persis errornya itu dimana letaknya. 
 
 Jadi, perhatikan untuk garis `---` harus benar-benar ada pembuka dan penutup & tepat sebelum penutup **jangan** ada jarak.
 

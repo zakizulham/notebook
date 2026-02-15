@@ -49,31 +49,35 @@ Ini adalah aturan paling krusial untuk menjaga kerapian repo jangka panjang.
 
 ### Aturan Penamaan File
 Gunakan format **kebab-case** (huruf kecil semua, dipisah tanda hubung).
+
 * ✅ Benar: `01-pengantar-r.qmd`
 * ❌ Salah: `01 Pengantar R.qmd` (Spasi bikin link error)
 * ❌ Salah: `MateriBaruBanget.qmd` (Huruf besar bisa bikin error di server Linux/GitHub)
 
 ### Manajemen Gambar
 Jangan asal tempel (*paste*) gambar! Gambar yang hilang (broken link) adalah aib sebuah website.
+
 1.  Buat folder bernama `images/` di samping file `.qmd` kalian.
 2.  Simpan gambar di situ dengan nama yang jelas (misal: `grafik-fungsi.png`).
 3.  Panggil gambar dengan sintaks:
+
     ```markdown
     ![Keterangan Gambar (Alt Text)](images/grafik-fungsi.png)
     ```
 
-## 3. Senjata Penulisan (Syntax Wajib)
-
-Sebagai anak Matematika/Statistika, kita butuh lebih dari sekadar teks biasa.
+## 3. Syntax Berguna
 
 ### A. Matematika (LaTeX)
 Quarto mendukung MathJax secara *native*.
+
 * **Inline (di dalam kalimat):** Gunakan satu dolar `$`.
     * Ketikan: `Misalkan $f(x) = x^2$`
     * Hasil: Misalkan $f(x) = x^2$
+
 * **Display (blok persamaan):** Gunakan dua dolar `$$`.
     * Ketikan: `$$\int_0^\infty e^{-x} dx = 1$$`
     * Hasil: 
+    
     $$\int_0^\infty e^{-x} dx = 1$$
 
 ### B. Callouts (Kotak Peringatan/Catatan)
@@ -103,6 +107,7 @@ summary(mtcars)
 ```
 
 **Opsi Penting (`#|`):**
+
 * `#| echo: true` -> Menampilkan kode di web (Default).
 * `#| echo: false` -> Menyembunyikan kode, hanya menampilkan hasil (grafik/tabel).
 * `#| eval: false` -> Menampilkan kode tapi **tidak dijalankan** (cocok untuk contoh kode yang berat atau pseudo-code).
@@ -114,6 +119,7 @@ summary(mtcars)
 ### Cara Preview:
 1.  **VS Code:** Klik tombol **"Preview"** di pojok kanan atas, atau tekan `Ctrl + Shift + K`.
 2.  **Terminal:** Ketik perintah:
+
     ```bash
     quarto preview nama-file.qmd
     ```

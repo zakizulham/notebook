@@ -102,6 +102,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -219,6 +222,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Branch Website</strong>: Nama branch website. Isinya hanya hasil jadi (index.html, folder docs/). Ini adalah apa yang dilihat pengunjung.</p></li>
 </ol>
 </section>
+<section id="gambaran-besar-alur-kerja-dari-awal-sampai-akhir" class="level4">
+<h4 class="anchored" data-anchor-id="gambaran-besar-alur-kerja-dari-awal-sampai-akhir">Gambaran Besar: Alur Kerja dari Awal Sampai Akhir</h4>
+<p>Sebelum masuk ke detail masing-masing langkah di bab-bab berikutnya, lihat dulu peta besar perjalanan materi kalian dari nol sampai tayang di web:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["✍️ Tulis .qmd"] --&gt; B["👁️ Preview Lokal"]
+    B --&gt; C["📦 quarto render"]
+    C --&gt; D["📂 Pindahkan docs/"]
+    D --&gt; E["🔀 Switch Branch"]
+    E --&gt; F["📋 Paste &amp; Push"]
+    F --&gt; G["🌐 Website Live!"]
+
+    style A fill:#e8f5e9,stroke:#4caf50
+    style B fill:#e8f5e9,stroke:#4caf50
+    style C fill:#fff3e0,stroke:#ff9800
+    style D fill:#fff3e0,stroke:#ff9800
+    style E fill:#e3f2fd,stroke:#2196f3
+    style F fill:#e3f2fd,stroke:#2196f3
+    style G fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Peta Warna
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>🟢 <strong>Hijau</strong>: Tahap menulis (Bab 2)</li>
+<li>🟠 <strong>Oranye</strong>: Tahap render &amp; persiapan (Bab 3)</li>
+<li>🔵 <strong>Biru</strong>: Tahap deploy ke GitHub Pages (Bab 3)</li>
+</ul>
+</div>
+</div>
+</section>
 <section id="mulai-cepat-quick-start" class="level4">
 <h4 class="anchored" data-anchor-id="mulai-cepat-quick-start">Mulai Cepat ~ Quick Start</h4>
 <p>Hal-hal yang paling penting dalam komunikasi via text adalah menulis. Bagaimana bisa menulis di Quarto Markdown? Itu adalah pertanyaan yang akan terjawab di modul ini.</p>
@@ -245,7 +295,7 @@ Best Practice
 <p>oke, kita akan terapkan.</p>
 <p><strong>Step 1: Install Quarto CLI</strong></p>
 <p>Mengapa (dan apa bagi yang tidak tau CLI)?</p>
-<p>CLI atau <em>Command Line Interface</em> secara harfiah berarti Tampilan Perintah Baris adalah aplikasi terminal yang terintgrasi dengan Operating System Komputer kalian. Tujuan install itu untuk membuat terminal default kalian (eg. windows adalah PowerShell) bisa mengakses perintah quarto.</p>
+<p>CLI atau <em>Command Line Interface</em> secara harfiah berarti Tampilan Perintah Baris adalah aplikasi terminal yang terintegrasi dengan Operating System Komputer kalian. Tujuan install itu untuk membuat terminal default kalian (eg. windows adalah PowerShell) bisa mengakses perintah quarto.</p>
 <p><strong>Apa pentingnya?</strong></p>
 <p>Kita akan cenderung mempelajari dan membiasakan menggunakan terminal melalui CLI kalian masing-masing. Kalau tampilan button tinggal pencet (atau Graphical User Interface GUI) itu secara alami mata kita bisa melihat visual dan fungsi dari ditekannya tombol itu. Meskipun teks terminal bisa secara intuisi dapat dipahami dari membaca dokumentasi maksud perintahnya. Tapi, ringkasan perintah apa yang penting dan berguna bisa diturunkan dari pengguna satu ke pengguna lain.</p>
 <p><strong>Step 2: Pilih Integrated Development Environment, IDE, yang kalian gunakan.</strong></p>
@@ -269,7 +319,7 @@ format: html
 <ul>
 <li><strong>Fungsinya</strong>: Memberi tahu Quarto judul halaman ini apa, siapa penulisnya, dan mau dijadikan output apa (HTML/PDF).</li>
 <li><strong>Aturan</strong>: Jangan pernah menghapus garis <code>---</code> ini, atau halaman akan error.</li>
-<li><strong>Perhatian</strong>: Terkadang, ketika kita ngoding dan bahasa pemograman yang kita gunakan merupakan high level langguage. Maka, ia memberikan detail lokasi di<em>line</em> mana lokasi error kita berada. Meskipun R Package mayoritas itu high level langguage. Namun, Jika yang error merupakan garis <code>---</code> dari pembuka YAML. Maka, pesan errornya bisa meleset. Jadi, kita tidak tau persis errornya itu dimana letaknya.</li>
+<li><strong>Perhatian</strong>: Terkadang, ketika kita ngoding dan bahasa pemrograman yang kita gunakan merupakan high level language. Maka, ia memberikan detail lokasi di <em>line</em> mana lokasi error kita berada. Meskipun R Package mayoritas itu high level language. Namun, jika yang error merupakan garis <code>---</code> dari pembuka YAML. Maka, pesan errornya bisa meleset. Jadi, kita tidak tau persis errornya itu dimana letaknya.</li>
 </ul>
 <p>Jadi, perhatikan untuk garis <code>---</code> harus benar-benar ada pembuka dan penutup &amp; tepat sebelum penutup <strong>jangan</strong> ada jarak.</p>
 <p>Contoh benar seperti contoh di atas.</p>

@@ -179,7 +179,7 @@ window.Quarto = {
   <li><a href="#aturan-penamaan-file" id="toc-aturan-penamaan-file" class="nav-link" data-scroll-target="#aturan-penamaan-file">Aturan Penamaan File</a></li>
   <li><a href="#manajemen-gambar" id="toc-manajemen-gambar" class="nav-link" data-scroll-target="#manajemen-gambar">Manajemen Gambar</a></li>
   </ul></li>
-  <li><a href="#senjata-penulisan-syntax-wajib" id="toc-senjata-penulisan-syntax-wajib" class="nav-link" data-scroll-target="#senjata-penulisan-syntax-wajib">3. Senjata Penulisan (Syntax Wajib)</a>
+  <li><a href="#syntax-berguna" id="toc-syntax-berguna" class="nav-link" data-scroll-target="#syntax-berguna">3. Syntax Berguna</a>
   <ul class="collapse">
   <li><a href="#a.-matematika-latex" id="toc-a.-matematika-latex" class="nav-link" data-scroll-target="#a.-matematika-latex">A. Matematika (LaTeX)</a></li>
   <li><a href="#b.-callouts-kotak-peringatancatatan" id="toc-b.-callouts-kotak-peringatancatatan" class="nav-link" data-scroll-target="#b.-callouts-kotak-peringatancatatan">B. Callouts (Kotak Peringatan/Catatan)</a></li>
@@ -261,42 +261,70 @@ window.Quarto = {
 <p>Ini adalah aturan paling krusial untuk menjaga kerapian repo jangka panjang.</p>
 <section id="aturan-penamaan-file" class="level3">
 <h3 class="anchored" data-anchor-id="aturan-penamaan-file">Aturan Penamaan File</h3>
-<p>Gunakan format <strong>kebab-case</strong> (huruf kecil semua, dipisah tanda hubung). * ✅ Benar: <code>01-pengantar-r.qmd</code> * ❌ Salah: <code>01 Pengantar R.qmd</code> (Spasi bikin link error) * ❌ Salah: <code>MateriBaruBanget.qmd</code> (Huruf besar bisa bikin error di server Linux/GitHub)</p>
+<p>Gunakan format <strong>kebab-case</strong> (huruf kecil semua, dipisah tanda hubung).</p>
+<ul>
+<li>✅ Benar: <code>01-pengantar-r.qmd</code></li>
+<li>❌ Salah: <code>01 Pengantar R.qmd</code> (Spasi bikin link error)</li>
+<li>❌ Salah: <code>MateriBaruBanget.qmd</code> (Huruf besar bisa bikin error di server Linux/GitHub)</li>
+</ul>
 </section>
 <section id="manajemen-gambar" class="level3">
 <h3 class="anchored" data-anchor-id="manajemen-gambar">Manajemen Gambar</h3>
-<p>Jangan asal tempel (<em>paste</em>) gambar! Gambar yang hilang (broken link) adalah aib sebuah website. 1. Buat folder bernama <code>images/</code> di samping file <code>.qmd</code> kalian. 2. Simpan gambar di situ dengan nama yang jelas (misal: <code>grafik-fungsi.png</code>). 3. Panggil gambar dengan sintaks: <code>markdown     ![Keterangan Gambar (Alt Text)](images/grafik-fungsi.png)</code></p>
+<p>Jangan asal tempel (<em>paste</em>) gambar! Gambar yang hilang (broken link) adalah aib sebuah website.</p>
+<ol type="1">
+<li><p>Buat folder bernama <code>images/</code> di samping file <code>.qmd</code> kalian.</p></li>
+<li><p>Simpan gambar di situ dengan nama yang jelas (misal: <code>grafik-fungsi.png</code>).</p></li>
+<li><p>Panggil gambar dengan sintaks:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Keterangan Gambar (Alt Text)](images/grafik-fungsi.png)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
 </section>
 </section>
-<section id="senjata-penulisan-syntax-wajib" class="level2">
-<h2 class="anchored" data-anchor-id="senjata-penulisan-syntax-wajib">3. Senjata Penulisan (Syntax Wajib)</h2>
-<p>Sebagai anak Matematika/Statistika, kita butuh lebih dari sekadar teks biasa.</p>
+<section id="syntax-berguna" class="level2">
+<h2 class="anchored" data-anchor-id="syntax-berguna">3. Syntax Berguna</h2>
 <section id="a.-matematika-latex" class="level3">
 <h3 class="anchored" data-anchor-id="a.-matematika-latex">A. Matematika (LaTeX)</h3>
-<p>Quarto mendukung MathJax secara <em>native</em>. * <strong>Inline (di dalam kalimat):</strong> Gunakan satu dolar <code>$</code>. * Ketikan: <code>Misalkan $f(x) = x^2$</code> * Hasil: Misalkan <span class="math inline">\(f(x) = x^2\)</span> * <strong>Display (blok persamaan):</strong> Gunakan dua dolar <code>$$</code>. * Ketikan: <code>$$\int_0^\infty e^{-x} dx = 1$$</code> * Hasil: <span class="math display">\[\int_0^\infty e^{-x} dx = 1\]</span></p>
+<p>Quarto mendukung MathJax secara <em>native</em>.</p>
+<ul>
+<li><strong>Inline (di dalam kalimat):</strong> Gunakan satu dolar <code>$</code>.
+<ul>
+<li>Ketikan: <code>Misalkan $f(x) = x^2$</code></li>
+<li>Hasil: Misalkan <span class="math inline">\(f(x) = x^2\)</span></li>
+</ul></li>
+<li><strong>Display (blok persamaan):</strong> Gunakan dua dolar <code>$$</code>.
+<ul>
+<li>Ketikan: <code>$$\int_0^\infty e^{-x} dx = 1$$</code></li>
+<li>Hasil:</li>
+</ul>
+<span class="math display">\[\int_0^\infty e^{-x} dx = 1\]</span></li>
+</ul>
 </section>
 <section id="b.-callouts-kotak-peringatancatatan" class="level3">
 <h3 class="anchored" data-anchor-id="b.-callouts-kotak-peringatancatatan">B. Callouts (Kotak Peringatan/Catatan)</h3>
 <p>Gunakan fitur ini untuk menonjolkan definisi, peringatan, atau tips penting. Jangan cuma pakai <em>bold</em>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definisi</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Matriks adalah susunan bilangan, simbol, atau ekspresi...</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tips</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>Gunakan shortcut <span class="in">`Alt + -`</span> untuk membuat tanda panah di RStudio.</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definisi</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>Matriks adalah susunan bilangan, simbol, atau ekspresi...</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tips</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>Gunakan shortcut <span class="in">`Alt + -`</span> untuk membuat tanda panah di RStudio.</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="c.-code-chunks-menampilkan-kode" class="level3">
 <h3 class="anchored" data-anchor-id="c.-code-chunks-menampilkan-kode">C. Code Chunks (Menampilkan Kode)</h3>
 <p>Untuk materi praktikum (R/Python), kita perlu menampilkan kode dan hasilnya.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-data</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Opsi Penting (<code>#|</code>):</strong> * <code>#| echo: true</code> -&gt; Menampilkan kode di web (Default). * <code>#| echo: false</code> -&gt; Menyembunyikan kode, hanya menampilkan hasil (grafik/tabel). * <code>#| eval: false</code> -&gt; Menampilkan kode tapi <strong>tidak dijalankan</strong> (cocok untuk contoh kode yang berat atau pseudo-code).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-data</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Opsi Penting (<code>#|</code>):</strong></p>
+<ul>
+<li><code>#| echo: true</code> -&gt; Menampilkan kode di web (Default).</li>
+<li><code>#| echo: false</code> -&gt; Menyembunyikan kode, hanya menampilkan hasil (grafik/tabel).</li>
+<li><code>#| eval: false</code> -&gt; Menampilkan kode tapi <strong>tidak dijalankan</strong> (cocok untuk contoh kode yang berat atau pseudo-code).</li>
+</ul>
 </section>
 </section>
 <section id="ritual-pratinjau-preview" class="level2">
@@ -305,8 +333,9 @@ window.Quarto = {
 <section id="cara-preview" class="level3">
 <h3 class="anchored" data-anchor-id="cara-preview">Cara Preview:</h3>
 <ol type="1">
-<li><strong>VS Code:</strong> Klik tombol <strong>“Preview”</strong> di pojok kanan atas, atau tekan <code>Ctrl + Shift + K</code>.</li>
-<li><strong>Terminal:</strong> Ketik perintah: <code>bash     quarto preview nama-file.qmd</code></li>
+<li><p><strong>VS Code:</strong> Klik tombol <strong>“Preview”</strong> di pojok kanan atas, atau tekan <code>Ctrl + Shift + K</code>.</p></li>
+<li><p><strong>Terminal:</strong> Ketik perintah:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview nama-file.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 <p>Pastikan: 1. Gambar muncul. 2. Persamaan matematika ter-render dengan benar. 3. Tabel tidak terpotong.</p>
 <p>➡️ Lanjut ke <strong><a href="../post/03-deployment.html">Bab 3: Ritual Deployment</a></strong></p>

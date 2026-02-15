@@ -187,7 +187,11 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#kasus-halaman-404-not-found" id="toc-kasus-halaman-404-not-found" class="nav-link" data-scroll-target="#kasus-halaman-404-not-found">Kasus: “Halaman 404 Not Found”</a></li>
   </ul></li>
-  <li><a href="#kontak-darurat-emergency-call" id="toc-kontak-darurat-emergency-call" class="nav-link" data-scroll-target="#kontak-darurat-emergency-call">4. Kontak Darurat (Emergency Call)</a></li>
+  <li><a href="#masalah-workflow" id="toc-masalah-workflow" class="nav-link" data-scroll-target="#masalah-workflow">4. Masalah Workflow</a>
+  <ul class="collapse">
+  <li><a href="#kasus-saya-menulis-di-branch-yang-salah" id="toc-kasus-saya-menulis-di-branch-yang-salah" class="nav-link" data-scroll-target="#kasus-saya-menulis-di-branch-yang-salah">Kasus: “Saya Menulis di Branch yang Salah!”</a></li>
+  </ul></li>
+  <li><a href="#kontak-darurat-emergency-call" id="toc-kontak-darurat-emergency-call" class="nav-link" data-scroll-target="#kontak-darurat-emergency-call">5. Kontak Darurat (Emergency Call)</a></li>
   </ul>
 </nav>
     </div>
@@ -225,6 +229,7 @@ window.Quarto = {
 </header>
 
 
+<p>kembali ke <a href="../index.html">halaman utama</a></p>
 <!-- # Troubleshooting (Kotak P3K) -->
 <p>Di dunia <em>programming</em>, error itu seperti bumbu dapur. Pasti ada. Jangan panik. Halaman ini berisi solusi untuk masalah paling umum yang sering membuat asisten baru keringat dingin.</p>
 <section id="masalah-git-github" class="level2">
@@ -233,13 +238,25 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="kasus-saya-kena-merge-conflict">Kasus: “Saya kena Merge Conflict!”</h3>
 <p><strong>Gejala:</strong> Saat <code>git pull</code> atau <code>git push</code>, muncul pesan merah <em>CONFLICT (content): Merge conflict in…</em></p>
 <p><strong>Penyebab:</strong> Ada dua orang mengedit baris yang sama di file yang sama pada waktu bersamaan.</p>
-<p><strong>Solusi:</strong> 1. Buka file yang bermasalah di VS Code. 2. Cari tanda <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code>, <code>=======</code>, dan <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>. <code>markdown     &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD     Materi ini ditulis oleh Zaki.     =======     Materi ini ditulis oleh Budi.     &gt;&gt;&gt;&gt;&gt;&gt;&gt; abcd123</code> 3. <strong>Pilih salah satu.</strong> Hapus tanda-tanda panah dan garis pembatas itu, sisakan teks yang benar. 4. Simpan file. 5. Lakukan <code>git add .</code>, <code>git commit</code>, dan <code>git push</code> lagi.</p>
+<p><strong>Solusi:</strong></p>
+<ol type="1">
+<li><p>Buka file yang bermasalah di VS Code.</p></li>
+<li><p>Cari tanda <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code>, <code>=======</code>, dan <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Materi ini ditulis oleh Zaki.</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">=======</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Materi ini ditulis oleh Budi.</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;&gt;&gt;&gt;&gt;&gt;&gt; abcd123</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Pilih salah satu.</strong> Hapus tanda-tanda panah dan garis pembatas itu, sisakan teks yang benar.</p></li>
+<li><p>Simpan file.</p></li>
+<li><p>Lakukan <code>git add .</code>, <code>git commit</code>, dan <code>git push</code> lagi.</p></li>
+</ol>
 </section>
 <section id="kasus-folder-submodule-saya-kosong" class="level3">
 <h3 class="anchored" data-anchor-id="kasus-folder-submodule-saya-kosong">Kasus: “Folder submodule saya kosong!”</h3>
 <p><strong>Gejala:</strong> Folder tahun lalu (misal <code>arsip/2024</code>) ada, tapi isinya nol besar.</p>
 <p><strong>Solusi:</strong> Kalian lupa mantra pemanggil arwah submodule. Jalankan ini di terminal:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> submodule update <span class="at">--init</span> <span class="at">--recursive</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> submodule update <span class="at">--init</span> <span class="at">--recursive</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="masalah-tampilan-web-quarto" class="level2">
@@ -248,13 +265,29 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="kasus-gambar-tidak-muncul-broken-image">Kasus: “Gambar tidak muncul (Broken Image)”</h3>
 <p><strong>Gejala:</strong> Di web hanya muncul ikon gambar pecah atau teks <code>alt</code>.</p>
 <p><strong>Penyebab:</strong> Jalur (<em>path</em>) file salah.</p>
-<p><strong>Solusi:</strong> 1. Pastikan nama file gambar <strong>tidak mengandung spasi</strong>. * ❌ <code>grafik fungsi.png</code> * ✅ <code>grafik-fungsi.png</code> 2. Cek jalur relatifnya. * Jika file <code>.qmd</code> ada di dalam folder <code>post/</code>, dan gambar ada di <code>post/images/</code>, panggil dengan: <code>images/namagambar.png</code>. * Jika gambar ada di folder utama <code>images/</code> (di luar <code>post/</code>), panggil dengan: <code>../images/namagambar.png</code> (<code>..</code> artinya naik satu folder).</p>
+<p><strong>Solusi:</strong></p>
+<ol type="1">
+<li><p>Pastikan nama file gambar <strong>tidak mengandung spasi</strong>.</p>
+<ul>
+<li>❌ <code>grafik fungsi.png</code></li>
+<li>✅ <code>grafik-fungsi.png</code></li>
+</ul></li>
+<li><p>Cek jalur relatifnya.</p>
+<ul>
+<li>Jika file <code>.qmd</code> ada di dalam folder <code>post/</code>, dan gambar ada di <code>post/images/</code>, panggil dengan: <code>images/namagambar.png</code>.</li>
+<li>Jika gambar ada di folder utama <code>images/</code> (di luar <code>post/</code>), panggil dengan: <code>../images/namagambar.png</code> (<code>..</code> artinya naik satu folder).</li>
+</ul></li>
+</ol>
 </section>
 <section id="kasus-rumus-matematika-tidak-jadi-masih-bentuk-..." class="level3">
 <h3 class="anchored" data-anchor-id="kasus-rumus-matematika-tidak-jadi-masih-bentuk-...">Kasus: “Rumus Matematika tidak jadi (Masih bentuk <span class="math inline">\(...\)</span>)”</h3>
 <p><strong>Gejala:</strong> Persamaan LaTeX tidak berubah jadi simbol matematika yang cantik.</p>
 <p><strong>Penyebab:</strong> Biasanya ada spasi antara tanda dolar <code>$</code> dan teksnya.</p>
-<p><strong>Solusi:</strong> * ❌ Salah: <code>$ x^2 + y^2 = r^2 $</code> (Ada spasi di awal/akhir) * ✅ Benar: <code>$x^2 + y^2 = r^2$</code> (Rapat)</p>
+<p><strong>Solusi:</strong></p>
+<ul>
+<li>❌ Salah: <code>$ x^2 + y^2 = r^2 $</code> (Ada spasi di awal/akhir)</li>
+<li>✅ Benar: <code>$x^2 + y^2 = r^2$</code> (Rapat)</li>
+</ul>
 </section>
 </section>
 <section id="masalah-deployment" class="level2">
@@ -262,14 +295,67 @@ window.Quarto = {
 <section id="kasus-halaman-404-not-found" class="level3">
 <h3 class="anchored" data-anchor-id="kasus-halaman-404-not-found">Kasus: “Halaman 404 Not Found”</h3>
 <p><strong>Gejala:</strong> Setelah deploy, web dibuka muncul tulisan 404 GitHub.</p>
-<p><strong>Penyebab:</strong> 1. Salah <em>branch</em> di pengaturan GitHub Pages. 2. File <code>index.html</code> tidak ada di folder paling luar (<em>root</em>) pada branch <code>site</code>.</p>
-<p><strong>Solusi:</strong> 1. Buka Repo di GitHub -&gt; <strong>Settings</strong> -&gt; <strong>Pages</strong>. 2. Pastikan <strong>Build and deployment</strong> bersumber dari <strong>Deploy from a branch</strong>. 3. Pastikan <strong>Branch</strong> yang dipilih adalah <code>site</code> (atau <code>gh-pages</code>) dan foldernya <code>/ (root)</code>. 4. Cek branch <code>site</code> kalian, pastikan <code>index.html</code> ada di luar, bukan tersembunyi di dalam folder <code>docs/</code>.</p>
+<p><strong>Penyebab:</strong></p>
+<ol type="1">
+<li>Salah <em>branch</em> di pengaturan GitHub Pages.</li>
+<li>File <code>index.html</code> tidak ada di folder paling luar (<em>root</em>) pada branch <code>site</code>.</li>
+</ol>
+<p><strong>Solusi:</strong></p>
+<ol type="1">
+<li>Buka Repo di GitHub -&gt; <strong>Settings</strong> -&gt; <strong>Pages</strong>.</li>
+<li>Pastikan <strong>Build and deployment</strong> bersumber dari <strong>Deploy from a branch</strong>.</li>
+<li>Pastikan <strong>Branch</strong> yang dipilih adalah <code>site</code> (atau <code>gh-pages</code>) dan foldernya <code>/ (root)</code>.</li>
+<li>Cek branch <code>site</code> kalian, pastikan <code>index.html</code> ada di luar, bukan tersembunyi di dalam folder <code>docs/</code>.</li>
+</ol>
+</section>
+</section>
+<section id="masalah-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="masalah-workflow">4. Masalah Workflow</h2>
+<section id="kasus-saya-menulis-di-branch-yang-salah" class="level3">
+<h3 class="anchored" data-anchor-id="kasus-saya-menulis-di-branch-yang-salah">Kasus: “Saya Menulis di Branch yang Salah!”</h3>
+<p><strong>Gejala:</strong> Kalian sudah mengetik banyak perubahan, lalu sadar ternyata sedang di branch <code>site</code> padahal seharusnya di branch <code>main</code> (atau sebaliknya).</p>
+<p><strong>Jangan Panik.</strong> Perubahan kalian tidak hilang. Git punya fitur bernama <code>stash</code> (simpan sementara).</p>
+<p><strong>Solusi:</strong></p>
+<ol type="1">
+<li><p><strong>Simpan dulu</strong> semua perubahan yang belum di-<em>commit</em>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>Perubahan kalian sekarang “disembunyikan” oleh Git ke tempat aman.</em></p></li>
+<li><p><strong>Pindah</strong> ke branch yang benar:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Keluarkan kembali</strong> perubahan yang tadi disimpan:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash pop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>Sekarang perubahan kalian sudah ada di branch yang benar. Lanjutkan bekerja seperti biasa.</em></p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tips Pencegahan
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Biasakan <strong>selalu cek branch</strong> sebelum mulai mengetik. Caranya:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Branch yang aktif akan ditandai dengan tanda bintang (<code>*</code>). Contoh:</p>
+<pre class="text"><code>* main
+  site</code></pre>
+<p>Artinya kalian sedang di branch <code>main</code>.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="kontak-darurat-emergency-call" class="level2">
-<h2 class="anchored" data-anchor-id="kontak-darurat-emergency-call">4. Kontak Darurat (Emergency Call)</h2>
+<h2 class="anchored" data-anchor-id="kontak-darurat-emergency-call">5. Kontak Darurat (Emergency Call)</h2>
 <p>Jika kalian sudah mencoba solusi di atas dan masih buntu (stuck lebih dari 1 jam), jangan buang waktu. Segera hubungi bantuan.</p>
-<p><strong>Hirarki Bertanya:</strong> 1. <strong>Google / ChatGPT / Gemini:</strong> Copy paste pesan error kalian. 90% solusi ada di sana. 2. <strong>Rekan Sesama Asisten:</strong> “Eh, lu pernah error gini gak?” 3. <strong>Koordinator Asisten (Head Lab):</strong> Bawa screenshot error dan jelaskan apa yang sudah kalian coba. 4. <strong>Mantan Koordinator (Alumni):</strong> Opsi terakhir jika masalah menyangkut struktur inti repo.</p>
+<p><strong>Hirarki Bertanya:</strong></p>
+<ol type="1">
+<li><strong>Google / ChatGPT / Gemini:</strong> Copy paste pesan error kalian. 90% solusi ada di sana.</li>
+<li><strong>Rekan Sesama Asisten:</strong> “Eh, lu pernah error gini gak?”</li>
+<li><strong>Koordinator Asisten (Head Lab):</strong> Bawa screenshot error dan jelaskan apa yang sudah kalian coba.</li>
+<li><strong>Mantan Koordinator (Alumni):</strong> Opsi terakhir jika masalah menyangkut struktur inti repo.</li>
+</ol>
 <hr>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">

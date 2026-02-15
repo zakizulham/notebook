@@ -192,6 +192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>kembali ke <a href="../index.html">halaman utama</a></p>
 <!-- # Manajemen Arsip (The Infinite Bookshelf) -->
 <p>Salah satu penyakit utama <em>repository</em> laboratorium adalah penumpukan file selama bertahun-tahun. Jika materi tahun 2020, 2021, hingga 2025 ditumpuk dalam satu repo, ukuran file akan membengkak (<em>bloat</em>) dan proses <em>clone</em> akan sangat lambat.</p>
 <p>Solusinya? Kita memecah setiap tahun ajaran menjadi <em>repository</em> terpisah, lalu menghubungkannya menggunakan teknologi kuno namun sakti bernama <strong>Git Submodules</strong>.</p>
@@ -219,7 +220,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p><strong>Keuntungan:</strong> 1. Repo utama tetap ringan (hanya hitungan Kilobyte). 2. Jika asisten tahun 2026 membuat kesalahan, materi tahun 2024 tidak akan ikut rusak.</p>
+<p><strong>Keuntungan:</strong></p>
+<ol type="1">
+<li>Repo utama tetap ringan (hanya hitungan Kilobyte).</li>
+<li>Jika asisten tahun 2026 membuat kesalahan, materi tahun 2024 tidak akan ikut rusak.</li>
+</ol>
 </section>
 <section id="masalah-klasik-folder-saya-kosong" class="level2">
 <h2 class="anchored" data-anchor-id="masalah-klasik-folder-saya-kosong">2. Masalah Klasik: “Folder Saya Kosong!”</h2>
@@ -228,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="solusi-cara-clone-yang-benar" class="level3">
 <h3 class="anchored" data-anchor-id="solusi-cara-clone-yang-benar">Solusi (Cara Clone yang Benar)</h3>
 <p>Jika kalian baru pertama kali mengunduh repo ini, gunakan perintah sakti:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--recurse-submodules</span> <span class="pp">[</span><span class="ss">https://github.com/username/Lab</span><span class="pp">-</span><span class="ss">Matematika.git</span><span class="pp">]</span><span class="er">(</span><span class="ex">https://github.com/username/Lab-Matematika.git</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--recurse-submodules</span> https://github.com/username/Lab-Matematika.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="solusi-jika-sudah-terlanjur-clone-biasa" class="level3">
 <h3 class="anchored" data-anchor-id="solusi-jika-sudah-terlanjur-clone-biasa">Solusi (Jika Sudah Terlanjur Clone Biasa)</h3>
@@ -245,10 +250,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Bagian ini biasanya dilakukan oleh Koordinator Asisten saat pergantian tahun ajaran atau semester.</p>
 <p>Misalkan kita ingin menambahkan materi tahun baru dari repo terpisah.</p>
 <ol type="1">
-<li>Pastikan kalian berada di <em>root folder</em> repo utama.</li>
-<li>Gunakan perintah <code>git submodule add</code>: <code>bash     # Format: git submodule add &lt;URL Repo Anak&gt; &lt;Nama Folder Tujuan&gt;     git submodule add [https://github.com/username/Materi-2027.git](https://github.com/username/Materi-2027.git) arsip/2027</code></li>
-<li>Git akan otomatis mengunduh repo tersebut dan membuat folder <code>arsip/2027</code>.</li>
-<li>Lakukan <em>commit</em> untuk menyimpan perubahan pada “Rak Buku” kita: <code>bash     git add .     git commit -m "Menambahkan arsip materi tahun 2027"     git push origin main</code></li>
+<li><p>Pastikan kalian berada di <em>root folder</em> repo utama.</p></li>
+<li><p>Gunakan perintah <code>git submodule add</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Format: git submodule add &lt;URL Repo Anak&gt; &lt;Nama Folder Tujuan&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> submodule add https://github.com/username/Materi-2027.git arsip/2027</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Git akan otomatis mengunduh repo tersebut dan membuat folder <code>arsip/2027</code>.</p></li>
+<li><p>Lakukan <em>commit</em> untuk menyimpan perubahan pada “Rak Buku” kita:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Menambahkan arsip materi tahun 2027"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 </section>
 <section id="aturan-emas-dos-and-donts" class="level2">
@@ -267,7 +277,12 @@ JANGAN LAKUKAN INI
 <p>Jangan pernah mengedit materi submodule (misal: mengedit file di dalam folder <code>arsip/2024/</code>) <strong>dari dalam repo utama</strong>.</p>
 </div>
 </div>
-<p><strong>Cara yang Benar Mengedit Arsip Lama:</strong> 1. Buka repo asli <code>Materi-2024</code> secara terpisah (di jendela VS Code baru). 2. Edit dan <em>push</em> di sana. 3. Kembali ke repo utama, lalu jalankan <code>git submodule update --remote</code> jika ingin menyamakan versi.</p>
+<p><strong>Cara yang Benar Mengedit Arsip Lama:</strong></p>
+<ol type="1">
+<li>Buka repo asli <code>Materi-2024</code> secara terpisah (di jendela VS Code baru).</li>
+<li>Edit dan <em>push</em> di sana.</li>
+<li>Kembali ke repo utama, lalu jalankan <code>git submodule update --remote</code> jika ingin menyamakan versi.</li>
+</ol>
 <hr>
 <p><strong>Sistem sudah rapi, arsip aman.</strong> Namun, secanggih apapun sistemnya, masalah pasti akan muncul. Entah itu konflik <em>merge</em> atau gambar yang hilang entah kemana.</p>
 <p>➡️ Lanjut ke <strong><a href="../post/05-troubleshooting.html">Bab 5: Troubleshooting &amp; FAQ</a></strong></p>
