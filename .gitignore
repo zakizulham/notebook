@@ -1,6 +1,13 @@
+# setting warp
+.vscode
+
 # Data-data R
 *.Rproj.user
 *.Rhistory
 *.RData
 *.Ruserdata
 *.Rproj
+/.quarto/
+
+# gemini history
+GEMINI.md
